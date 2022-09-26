@@ -6,13 +6,13 @@ public class Operaciones {
 	Scanner sc = new Scanner(System.in);
 
 	Alumnos array[] = new Alumnos[10];
-	Alumnos alu = new Alumnos();
+	
 	String lista = "";
 
 	public void recorrerAlumno() {
 
 		for (int i = 0; i < array.length; i++) {
-
+			Alumnos alu = new Alumnos();
 			System.out.println("Ingrese el nombre del alumno " + (i + 1) + ": ");
 			alu.setNombre(sc.next());
 
@@ -28,19 +28,23 @@ public class Operaciones {
 		}
 
 		System.out.println(lista.toString());
-
-		double mayor, menor;
-		mayor = menor = array[0].getNota();
-
-		for (int i = 0; i < array.length; i++) {
-			if (array[i].getNota() > mayor) {
-				mayor = array[i].getNota();
-			}
-			if (alu.getNota() < menor) {
-				menor = array[i].getNota();
+		Alumnos aux;
+		for (int i = 0; i < array.length - 1; i++) {
+			for (int j = i + 1; j < array.length; j++) {
+				Double maximo = array[j].getNota();
+				if (maximo.compareTo(array[i].getNota()) > 0) {
+					aux = array[i];
+					array[i] = array[j];
+					array[j] = aux;
+				}
 			}
 		}
-		System.out.println("La nota mayor es : " + mayor);
+
+		double mayor;
+		String nombre;
+		mayor = array[0].getNota();
+		nombre = array[0].getNombre();
+		System.out.println("La nota mayor es : "  + mayor + " y Corresponde a : " + nombre);
 
 	}
 
